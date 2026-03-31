@@ -1,30 +1,92 @@
 /**
- * Book My Stay Application - Use Case 1
- * This class represents the entry point of the Hotel Booking System.
- * It prints a welcome message along with application details.
+ * Book My Stay Application - Use Case 2
+ * This class demonstrates room initialization using
+ * abstraction, inheritance, and static availability.
  *
  * @author Aditya Jain
- * @version 1.0
+ * @version 2.0
  */
-public class UseCase1HotelBookingApp {
 
-    /**
-     * Main method - Entry point of the program
-     * @param args Command line arguments
-     */
+// Abstract class
+abstract class Room {
+    protected String type;
+    protected int beds;
+    protected double price;
+
+    // Constructor
+    public Room(String type, int beds, double price) {
+        this.type = type;
+        this.beds = beds;
+        this.price = price;
+    }
+
+    // Abstract method
+    public abstract void displayRoomDetails();
+}
+
+// Single Room class
+class SingleRoom extends Room {
+
+    public SingleRoom() {
+        super("Single Room", 1, 1500);
+    }
+
+    @Override
+    public void displayRoomDetails() {
+        System.out.println(type + " | Beds: " + beds + " | Price: ₹" + price);
+    }
+}
+
+// Double Room class
+class DoubleRoom extends Room {
+
+    public DoubleRoom() {
+        super("Double Room", 2, 2500);
+    }
+
+    @Override
+    public void displayRoomDetails() {
+        System.out.println(type + " | Beds: " + beds + " | Price: ₹" + price);
+    }
+}
+
+// Suite Room class
+class SuiteRoom extends Room {
+
+    public SuiteRoom() {
+        super("Suite Room", 3, 5000);
+    }
+
+    @Override
+    public void displayRoomDetails() {
+        System.out.println(type + " | Beds: " + beds + " | Price: ₹" + price);
+    }
+}
+
+// Main class
+public class UseCase2RoomInitialization {
+
     public static void main(String[] args) {
 
-        // Welcome Banner
-        System.out.println("=======================================");
-        System.out.println("      Welcome to Book My Stay App      ");
-        System.out.println("=======================================");
+        // Static availability variables
+        int singleAvailable = 5;
+        int doubleAvailable = 3;
+        int suiteAvailable = 2;
 
-        // Application Details
-        System.out.println("Application Name : Hotel Booking System");
-        System.out.println("Version          : 1.0");
+        // Polymorphism (parent reference)
+        Room r1 = new SingleRoom();
+        Room r2 = new DoubleRoom();
+        Room r3 = new SuiteRoom();
 
-        // Status Message
-        System.out.println("\nSystem initialized successfully!");
-        System.out.println("Ready for next use cases...");
+        System.out.println("===== Room Types & Availability =====");
+
+        r1.displayRoomDetails();
+        System.out.println("Available: " + singleAvailable + "\n");
+
+        r2.displayRoomDetails();
+        System.out.println("Available: " + doubleAvailable + "\n");
+
+        r3.displayRoomDetails();
+        System.out.println("Available: " + suiteAvailable);
     }
 }
